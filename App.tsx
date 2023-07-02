@@ -1,20 +1,42 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { useEffect, useCallback } from 'react'
+import { StatusBar } from 'expo-status-bar'
+import * as SplashScreen from 'expo-splash-screen'
+
+import {
+  useFonts,
+  NunitoSans_400Regular,
+  NunitoSans_700Bold,
+} from '@expo-google-fonts/nunito-sans'
+
+import { Home } from '@screens/Home'
+
+SplashScreen.preventAutoHideAsync()
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+  const [hasFontsLoaded] = useFonts({
+    NunitoSans_400Regular,
+    NunitoSans_700Bold,
+  })
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+  const hideSplashScreenWhenHasFontsLoaded = useCallback(async () => {
+    if (hasFontsLoaded) {
+      await SplashScreen.hideAsync()
+    }
+  }, [hasFontsLoaded])
+
+  useEffect(() => {
+    hideSplashScreenWhenHasFontsLoaded()
+  }, [hideSplashScreenWhenHasFontsLoaded])
+
+  if (!hasFontsLoaded) {
+    return null
+  }
+
+  return (
+    <>
+      <StatusBar style="dark" backgroundColor="transparent" translucent />
+
+      <Home />
+    </>
+  )
+}
