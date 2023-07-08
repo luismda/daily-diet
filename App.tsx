@@ -1,5 +1,5 @@
 import { useEffect, useCallback } from 'react'
-import { StatusBar } from 'expo-status-bar'
+import { StatusBar } from 'react-native'
 import * as SplashScreen from 'expo-splash-screen'
 
 import {
@@ -34,7 +34,11 @@ export default function App() {
 
   return (
     <>
-      <StatusBar style="dark" backgroundColor="transparent" translucent />
+      <StatusBar
+        barStyle="dark-content"
+        backgroundColor="transparent"
+        translucent
+      />
 
       <Home />
     </>
