@@ -8,7 +8,7 @@ import {
   NunitoSans_700Bold,
 } from '@expo-google-fonts/nunito-sans'
 
-import { Metrics } from '@screens/Metrics'
+import { NewMeal } from '@screens/NewMeal'
 
 SplashScreen.preventAutoHideAsync()
 
@@ -40,7 +40,7 @@ export default function App() {
         translucent
       />
 
-      <Metrics />
+      <NewMeal />
     </>
   )
 }

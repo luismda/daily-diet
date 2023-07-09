@@ -6,13 +6,13 @@ import { Text } from '@components/Text'
 interface MetricCardProps extends ViewProps {
   metric: number
   description: string
-  variant?: 'success' | 'danger' | 'gray'
+  variant?: 'success' | 'danger' | 'default'
 }
 
 export function MetricCard({
   metric,
   description,
-  variant = 'gray',
+  variant = 'default',
   className,
   ...rest
 }: MetricCardProps) {
