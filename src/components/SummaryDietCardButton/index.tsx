@@ -22,8 +22,6 @@ export function SummaryDietCardButton({
 
   return (
     <TouchableOpacity
-      accessibilityLabel="Visualizar suas métricas na dieta"
-      accessibilityHint="Tela de métricas com estatísticas completas sobre sua dieta"
       activeOpacity={0.7}
       className={clsx(
         'relative items-center justify-center gap-[2px] rounded-lg px-4 py-5',

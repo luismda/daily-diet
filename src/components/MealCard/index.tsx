@@ -1,9 +1,9 @@
-import { View, ViewProps } from 'react-native'
+import { TouchableOpacity, TouchableOpacityProps, View } from 'react-native'
 import { clsx } from 'clsx'
 
 import { Text } from '@components/Text'
 
-interface MealCardProps extends ViewProps {
+interface MealCardProps extends TouchableOpacityProps {
   name: string
   time: string
   isInsideDiet: boolean
@@ -11,7 +11,8 @@ interface MealCardProps extends ViewProps {
 
 export function MealCard({ name, time, isInsideDiet, ...rest }: MealCardProps) {
   return (
-    <View
+    <TouchableOpacity
+      activeOpacity={0.7}
       className="flex-row items-center space-x-3 rounded-md border border-gray-300 py-[14px] pl-3 pr-4"
       {...rest}
     >
@@ -29,6 +30,6 @@ export function MealCard({ name, time, isInsideDiet, ...rest }: MealCardProps) {
           'bg-red-300': !isInsideDiet,
         })}
       />
-    </View>
+    </TouchableOpacity>
   )
 }

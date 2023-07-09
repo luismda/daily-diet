@@ -3,6 +3,7 @@
     "@rocketseat/eslint-config/react"
   ],
   "rules": {
-    "camelcase": "off"
+    "camelcase": "off",
+    "no-unused-vars": "off"
   }
 }

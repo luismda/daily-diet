@@ -1,6 +1,7 @@
 import { ScrollView, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Plus } from 'phosphor-react-native'
+import { useNavigation } from '@react-navigation/native'
 
 import { Text } from '@components/Text'
 import { Button } from '@components/Button'
@@ -9,11 +10,30 @@ import { MainHeader } from '@components/MainHeader'
 import { SummaryDietCardButton } from '@components/SummaryDietCardButton'
 
 export function Home() {
+  const navigation = useNavigation()
+
+  function handleNavigateToMetrics() {
+    navigation.navigate('metrics')
+  }
+
+  function handleNavigateToNewMeal() {
+    navigation.navigate('new')
+  }
+
+  function handleNavigateToMealDetails() {
+    navigation.navigate('details', { mealId: '' })
+  }
+
   return (
     <SafeAreaView className="flex-1 bg-gray-100 p-6">
       <MainHeader />
 
-      <SummaryDietCardButton decimalPercentage={0.623} />
+      <SummaryDietCardButton
+        decimalPercentage={0.623}
+        accessibilityLabel="Visualizar suas métricas na dieta"
+        accessibilityHint="Tela de métricas com estatísticas completas sobre sua dieta"
+        onPress={handleNavigateToMetrics}
+      />
 
       <View className="mt-10 flex-1">
         <Text className="text-gray-900">Refeições</Text>
@@ -22,6 +42,7 @@ export function Home() {
           accessibilityLabel="Cadastrar uma nova refeição"
           accessibilityHint="Tela com um fomulário para cadastrar uma nova refeição"
           className="mt-2"
+          onPress={handleNavigateToNewMeal}
         >
           <Button.Icon icon={Plus} />
 
@@ -39,7 +60,14 @@ export function Home() {
               </Text>
 
               <View className="mt-2 space-y-2">
-                <MealCard name="X-tudo" time="20:00" isInsideDiet={false} />
+                <MealCard
+                  name="X-tudo"
+                  time="20:00"
+                  isInsideDiet={false}
+                  accessibilityLabel="Ver detalhes da refeição X-tudo"
+                  accessibilityHint="Tela de detalhes da refeição X-tudo"
+                  onPress={handleNavigateToMealDetails}
+                />
 
                 <MealCard
                   name="Whey protein com leite"

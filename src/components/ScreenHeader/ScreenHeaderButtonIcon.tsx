@@ -13,7 +13,7 @@ export function ScreenHeaderButtonIcon({
   ...rest
 }: ScreenHeaderButtonIconProps) {
   return (
-    <ButtonIcon.Root className="absolute" {...rest}>
+    <ButtonIcon.Root className="absolute z-[1]" {...rest}>
       <ButtonIcon.Icon icon={Icon} color="text-gray-800" />
     </ButtonIcon.Root>
   )

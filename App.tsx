@@ -8,7 +8,7 @@ import {
   NunitoSans_700Bold,
 } from '@expo-google-fonts/nunito-sans'
 
-import { EditMeal } from '@screens/EditMeal'
+import { Routes } from '@routes/index'
 
 SplashScreen.preventAutoHideAsync()
 
@@ -40,7 +40,7 @@ export default function App() {
         translucent
       />
 
-      <EditMeal />
+      <Routes />
     </>
   )
 }

@@ -1,4 +1,5 @@
 import { View } from 'react-native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 import { ArrowLeft, PencilSimpleLine, Trash } from 'phosphor-react-native'
 
 import { Text } from '@components/Text'
@@ -7,7 +8,24 @@ import { DietTag } from '@components/DietTag'
 import { Container } from '@components/Container'
 import { ScreenHeader } from '@components/ScreenHeader'
 
+type RouteParams = {
+  mealId: string
+}
+
 export function MealDetails() {
+  const navigation = useNavigation()
+
+  const route = useRoute()
+  const { mealId } = route.params as RouteParams
+
+  function handleGoBack() {
+    navigation.navigate('home')
+  }
+
+  function handleNavigateToEditMeal() {
+    navigation.navigate('edit', { mealId })
+  }
+
   const isInsideDiet = false
 
   return (
@@ -17,6 +35,7 @@ export function MealDetails() {
           accessibilityLabel="Voltar para tela anterior"
           accessibilityHint="Tela inicial com a sua lista de refeições cadastradas"
           icon={ArrowLeft}
+          onPress={handleGoBack}
         />
 
         <ScreenHeader.Title>Refeição</ScreenHeader.Title>
@@ -45,7 +64,10 @@ export function MealDetails() {
           <DietTag isInsideDiet={isInsideDiet} className="mt-6 self-start" />
         </View>
 
-        <Button.Root>
+        <Button.Root
+          accessibilityHint="Tela para editar os dados desta refeição"
+          onPress={handleNavigateToEditMeal}
+        >
           <Button.Icon icon={PencilSimpleLine} />
 
           <Button.Text>Editar refeição</Button.Text>

@@ -1,4 +1,5 @@
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { useNavigation } from '@react-navigation/native'
 import { ArrowLeft } from 'phosphor-react-native'
 import { clsx } from 'clsx'
 
@@ -12,6 +13,12 @@ interface MetricHeaderProps {
 }
 
 export function MetricHeader({ decimalPercentage }: MetricHeaderProps) {
+  const navigation = useNavigation()
+
+  function handleGoBack() {
+    navigation.navigate('home')
+  }
+
   const hasMoreThanHalfOfMealsInDiet = decimalPercentage >= 0.5
   const percentageFormatted = numberFormat.format(decimalPercentage * 100)
 
@@ -22,7 +29,12 @@ export function MetricHeader({ decimalPercentage }: MetricHeaderProps) {
         'bg-red-100': !hasMoreThanHalfOfMealsInDiet,
       })}
     >
-      <ButtonIcon.Root className="absolute left-6 top-16">
+      <ButtonIcon.Root
+        accessibilityLabel="Voltar para tela anterior"
+        accessibilityHint="Tela inicial com a sua lista de refeições cadastradas"
+        className="absolute left-6 top-16"
+        onPress={handleGoBack}
+      >
         <ButtonIcon.Icon
           icon={ArrowLeft}
           color={clsx({
