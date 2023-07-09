@@ -16,7 +16,7 @@ export function Feedback() {
       <View className="space-y-2">
         <Text
           weight="bold"
-          size="xl"
+          size="2xl"
           className={clsx('text-center', {
             'text-green-500': isInsideDiet,
             'text-red-500': !isInsideDiet,

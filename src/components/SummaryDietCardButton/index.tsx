@@ -43,7 +43,7 @@ export function SummaryDietCardButton({
         size={24}
       />
 
-      <Text weight="bold" size="2xl" className="text-gray-900">
+      <Text weight="bold" size="3xl" className="text-gray-900">
         {percentageFormatted}%
       </Text>
 

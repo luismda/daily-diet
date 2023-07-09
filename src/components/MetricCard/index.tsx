@@ -28,11 +28,11 @@ export function MetricCard({
       )}
       {...rest}
     >
-      <Text weight="bold" size="xl" className="text-gray-900">
+      <Text weight="bold" size="2xl" className="text-gray-900">
         {metric}
       </Text>
 
-      <Text size="sm" className="text-center text-gray-800">
+      <Text size="sm" className="text-center">
         {description}
       </Text>
     </View>

@@ -3,7 +3,7 @@ import { clsx } from 'clsx'
 
 export interface TextProps extends NativeTextProps {
   weight?: 'regular' | 'bold'
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl'
 }
 
 export function Text({
@@ -25,6 +25,7 @@ export function Text({
           'text-lg': size === 'lg',
           'text-xl': size === 'xl',
           'text-2xl': size === '2xl',
+          'text-3xl': size === '3xl',
         },
         className,
       )}

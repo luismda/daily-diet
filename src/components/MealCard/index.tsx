@@ -20,7 +20,7 @@ export function MealCard({ name, time, isInsideDiet, ...rest }: MealCardProps) {
           {time}
         </Text>
 
-        <Text className="pl-3 text-gray-800">{name}</Text>
+        <Text className="pl-3">{name}</Text>
       </View>
 
       <View
