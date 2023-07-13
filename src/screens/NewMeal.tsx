@@ -2,7 +2,7 @@ import { View } from 'react-native'
 import { ArrowLeft } from 'phosphor-react-native'
 import { useNavigation } from '@react-navigation/native'
 
-import { MealForm } from '@components/MealForm'
+import { MealForm, MealFormDataOutput } from '@components/MealForm'
 import { Container } from '@components/Container'
 import { ScreenHeader } from '@components/ScreenHeader'
 
@@ -11,6 +11,10 @@ export function NewMeal() {
 
   function handleGoBack() {
     navigation.navigate('home')
+  }
+
+  async function handleCreateNewMeal(meal: MealFormDataOutput) {
+    console.log(meal)
   }
 
   return (
@@ -27,7 +31,7 @@ export function NewMeal() {
       </ScreenHeader.Root>
 
       <Container>
-        <MealForm />
+        <MealForm onSubmit={handleCreateNewMeal} />
       </Container>
     </View>
   )

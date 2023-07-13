@@ -1,3 +1,5 @@
+import '@lib/dayjs'
+
 import { useEffect, useCallback } from 'react'
 import { StatusBar } from 'react-native'
 import * as SplashScreen from 'expo-splash-screen'
