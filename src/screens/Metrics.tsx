@@ -4,6 +4,7 @@ import { Alert, View } from 'react-native'
 import { MetricsOfMealsStorageDTO } from '@storage/meal/MealStorageDTO'
 
 import { Text } from '@components/Text'
+import { Loading } from '@components/Loading'
 import { Container } from '@components/Container'
 import { MetricCard } from '@components/MetricCard'
 import { MetricHeader } from '@components/MetricHeader'
@@ -13,7 +14,11 @@ export function Metrics() {
   const [metricsOfMeals, setMetricsOfMeals] =
     useState<MetricsOfMealsStorageDTO | null>(null)
 
+  const [isLoading, setIsLoading] = useState(true)
+
   async function fetchMetricsOfMeals() {
+    setIsLoading(true)
+
     try {
       const metrics = await getMetricsOfMeals()
 
@@ -25,12 +30,18 @@ export function Metrics() {
       )
 
       console.log(error)
+    } finally {
+      setIsLoading(false)
     }
   }
 
   useEffect(() => {
     fetchMetricsOfMeals()
   }, [])
+
+  if (isLoading) {
+    return <Loading />
+  }
 
   return (
     <View className="flex-1">

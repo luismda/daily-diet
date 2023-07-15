@@ -6,7 +6,7 @@ export interface MealStorageDTO {
   realizedAt: string
 }
 
-export interface GroupedMealsDTO {
+export interface GroupedMealsStorageDTO {
   title: string
   data: MealStorageDTO[]
 }

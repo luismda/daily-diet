@@ -1,13 +1,13 @@
 import { SectionList } from 'react-native'
 import dayjs from 'dayjs'
 
-import { GroupedMealsDTO } from '@storage/meal/MealStorageDTO'
+import { GroupedMealsStorageDTO } from '@storage/meal/MealStorageDTO'
 
 import { Text } from '@components/Text'
 import { MealCard } from '@components/MealCard'
 
 interface MealListProps {
-  meals: GroupedMealsDTO[]
+  meals: GroupedMealsStorageDTO[]
   onSelectedMeal: (mealId: string) => void
 }
 

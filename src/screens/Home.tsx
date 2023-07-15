@@ -4,7 +4,7 @@ import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Plus } from 'phosphor-react-native'
 
-import { GroupedMealsDTO } from '@storage/meal/MealStorageDTO'
+import { GroupedMealsStorageDTO } from '@storage/meal/MealStorageDTO'
 
 import { listAllMeals } from '@storage/meal/listAllMeals'
 import { groupMealsBySameDay } from '@utils/groupMealsBySameDay'
@@ -17,7 +17,7 @@ import { MainHeader } from '@components/MainHeader'
 import { SummaryDietCardButton } from '@components/SummaryDietCardButton'
 
 export function Home() {
-  const [meals, setMeals] = useState<GroupedMealsDTO[]>([])
+  const [meals, setMeals] = useState<GroupedMealsStorageDTO[]>([])
   const [isLoading, setIsLoading] = useState(true)
 
   const navigation = useNavigation()
