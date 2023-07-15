@@ -3,5 +3,10 @@ export interface MealStorageDTO {
   name: string
   description: string
   isInsideDiet: boolean
-  realizedAt: Date
+  realizedAt: string
+}
+
+export interface GroupedMealsDTO {
+  title: string
+  data: MealStorageDTO[]
 }

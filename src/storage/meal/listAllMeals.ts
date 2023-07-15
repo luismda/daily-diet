@@ -2,6 +2,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import { MEAL_COLLECTION } from '@constants/storage/meal'
 
+import { sortMealsByMoreRecent } from '@utils/sortMealsByMoreRecent'
+
 import { MealStorageDTO } from './MealStorageDTO'
 
 export async function listAllMeals() {
@@ -9,5 +11,7 @@ export async function listAllMeals() {
 
   const meals: MealStorageDTO[] = storedMeals ? JSON.parse(storedMeals) : []
 
-  return meals
+  const sortedMeals = sortMealsByMoreRecent(meals)
+
+  return sortedMeals
 }

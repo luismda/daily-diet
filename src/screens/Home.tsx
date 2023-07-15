@@ -1,15 +1,25 @@
-import { ScrollView, View } from 'react-native'
+import { useState, useCallback } from 'react'
+import { Alert, View } from 'react-native'
+import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Plus } from 'phosphor-react-native'
-import { useNavigation } from '@react-navigation/native'
+
+import { GroupedMealsDTO } from '@storage/meal/MealStorageDTO'
+
+import { listAllMeals } from '@storage/meal/listAllMeals'
+import { groupMealsBySameDay } from '@utils/groupMealsBySameDay'
 
 import { Text } from '@components/Text'
 import { Button } from '@components/Button'
-import { MealCard } from '@components/MealCard'
+import { Loading } from '@components/Loading'
+import { MealList } from '@components/MealList'
 import { MainHeader } from '@components/MainHeader'
 import { SummaryDietCardButton } from '@components/SummaryDietCardButton'
 
 export function Home() {
+  const [meals, setMeals] = useState<GroupedMealsDTO[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+
   const navigation = useNavigation()
 
   function handleNavigateToMetrics() {
@@ -20,9 +30,35 @@ export function Home() {
     navigation.navigate('new')
   }
 
-  function handleNavigateToMealDetails() {
-    navigation.navigate('details', { mealId: '' })
+  function handleNavigateToMealDetails(mealId: string) {
+    navigation.navigate('details', { mealId })
   }
+
+  async function fetchMeals() {
+    setIsLoading(true)
+
+    try {
+      const storedMeals = await listAllMeals()
+      const groupedMealsBySameDay = groupMealsBySameDay(storedMeals)
+
+      setMeals(groupedMealsBySameDay)
+    } catch (error) {
+      Alert.alert(
+        'Refeições',
+        'Ocorreu um erro ao buscar suas refeições. Tente novamente.',
+      )
+
+      console.log(error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  useFocusEffect(
+    useCallback(() => {
+      fetchMeals()
+    }, []),
+  )
 
   return (
     <SafeAreaView className="flex-1 bg-gray-100 p-6">
@@ -41,7 +77,7 @@ export function Home() {
         <Button.Root
           accessibilityLabel="Cadastrar uma nova refeição"
           accessibilityHint="Tela com um fomulário para cadastrar uma nova refeição"
-          className="mt-2"
+          className="mb-8 mt-2"
           onPress={handleNavigateToNewMeal}
         >
           <Button.Icon icon={Plus} />
@@ -49,75 +85,14 @@ export function Home() {
           <Button.Text>Nova refeição</Button.Text>
         </Button.Root>
 
-        <View className="mt-8 flex-1">
-          <ScrollView
-            className="space-y-8"
-            showsVerticalScrollIndicator={false}
-          >
-            <View>
-              <Text weight="bold" size="lg" className="text-gray-900">
-                12.08.22
-              </Text>
-
-              <View className="mt-2 space-y-2">
-                <MealCard
-                  name="X-tudo"
-                  time="20:00"
-                  isInsideDiet={false}
-                  accessibilityLabel="Ver detalhes da refeição X-tudo"
-                  accessibilityHint="Tela de detalhes da refeição X-tudo"
-                  onPress={handleNavigateToMealDetails}
-                />
-
-                <MealCard
-                  name="Whey protein com leite"
-                  time="16:00"
-                  isInsideDiet
-                />
-
-                <MealCard
-                  name="Salada cesar com frango..."
-                  time="12:30"
-                  isInsideDiet
-                />
-
-                <MealCard
-                  name="Vitamina de banana com..."
-                  time="09:30"
-                  isInsideDiet
-                />
-              </View>
-            </View>
-
-            <View>
-              <Text weight="bold" size="lg" className="text-gray-900">
-                11.08.22
-              </Text>
-
-              <View className="mt-2 space-y-2">
-                <MealCard name="X-tudo" time="20:00" isInsideDiet={false} />
-
-                <MealCard
-                  name="Whey protein com leite"
-                  time="16:00"
-                  isInsideDiet
-                />
-
-                <MealCard
-                  name="Salada cesar com frango..."
-                  time="12:30"
-                  isInsideDiet
-                />
-
-                <MealCard
-                  name="Vitamina de banana com..."
-                  time="09:30"
-                  isInsideDiet
-                />
-              </View>
-            </View>
-          </ScrollView>
-        </View>
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <MealList
+            meals={meals}
+            onSelectedMeal={handleNavigateToMealDetails}
+          />
+        )}
       </View>
     </SafeAreaView>
   )

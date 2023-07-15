@@ -51,13 +51,13 @@ const mealFormSchema = z
       `${meal.date} ${meal.time}`,
       'DD/MM/YYYY HH:mm',
       true,
-    ).toDate()
+    )
 
     return {
       name: meal.name,
       description: meal.description,
       isInsideDiet: meal.isInsideDiet,
-      realizedAt: dateOfMeal,
+      realizedAt: dateOfMeal.toDate().toISOString(),
     }
   })
 

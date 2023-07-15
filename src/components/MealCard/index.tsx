@@ -9,11 +9,20 @@ interface MealCardProps extends TouchableOpacityProps {
   isInsideDiet: boolean
 }
 
-export function MealCard({ name, time, isInsideDiet, ...rest }: MealCardProps) {
+export function MealCard({
+  name,
+  time,
+  isInsideDiet,
+  className,
+  ...rest
+}: MealCardProps) {
   return (
     <TouchableOpacity
       activeOpacity={0.7}
-      className="flex-row items-center space-x-3 rounded-md border border-gray-300 py-[14px] pl-3 pr-4"
+      className={clsx(
+        'flex-row items-center space-x-3 rounded-md border border-gray-300 py-[14px] pl-3 pr-4',
+        className,
+      )}
       {...rest}
     >
       <View className="flex-1 flex-row items-center space-x-3 divide-x-[1px] divide-gray-400">
