@@ -1,10 +1,12 @@
-import { View } from 'react-native'
+import { View, Alert } from 'react-native'
 import { ArrowLeft } from 'phosphor-react-native'
 import { useNavigation } from '@react-navigation/native'
 
-import { MealForm, MealFormDataOutput } from '@components/MealForm'
+import { createMeal } from '@storage/meal/createMeal'
+
 import { Container } from '@components/Container'
 import { ScreenHeader } from '@components/ScreenHeader'
+import { MealForm, MealFormDataOutput } from '@components/MealForm'
 
 export function NewMeal() {
   const navigation = useNavigation()
@@ -14,7 +16,18 @@ export function NewMeal() {
   }
 
   async function handleCreateNewMeal(meal: MealFormDataOutput) {
-    console.log(meal)
+    try {
+      await createMeal(meal)
+
+      navigation.navigate('feedback', { isInsideDiet: meal.isInsideDiet })
+    } catch (error) {
+      Alert.alert(
+        'Nova refeição',
+        'Ocorreu um erro ao cadastrar sua refeição. Tente novamente.',
+      )
+
+      console.log(error)
+    }
   }
 
   return (
