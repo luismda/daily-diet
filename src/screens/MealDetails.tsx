@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { Alert, View } from 'react-native'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { ArrowLeft, PencilSimpleLine, Trash } from 'phosphor-react-native'
@@ -35,7 +35,7 @@ export function MealDetails() {
     navigation.navigate('edit', { mealId })
   }
 
-  async function fetchMeal() {
+  const fetchMeal = useCallback(async () => {
     setIsLoading(true)
 
     try {
@@ -52,11 +52,11 @@ export function MealDetails() {
     } finally {
       setIsLoading(false)
     }
-  }
+  }, [mealId])
 
   useEffect(() => {
     fetchMeal()
-  }, [])
+  }, [fetchMeal])
 
   if (isLoading) {
     return <Loading />
