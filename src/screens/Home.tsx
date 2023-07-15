@@ -22,10 +22,6 @@ export function Home() {
 
   const navigation = useNavigation()
 
-  function handleNavigateToMetrics() {
-    navigation.navigate('metrics')
-  }
-
   function handleNavigateToNewMeal() {
     navigation.navigate('new')
   }
@@ -64,12 +60,7 @@ export function Home() {
     <SafeAreaView className="flex-1 bg-gray-100 p-6">
       <MainHeader />
 
-      <SummaryDietCardButton
-        decimalPercentage={0.623}
-        accessibilityLabel="Visualizar suas métricas na dieta"
-        accessibilityHint="Tela de métricas com estatísticas completas sobre sua dieta"
-        onPress={handleNavigateToMetrics}
-      />
+      <SummaryDietCardButton />
 
       <View className="mt-10 flex-1">
         <Text className="text-gray-900">Refeições</Text>
