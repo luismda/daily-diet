@@ -10,3 +10,11 @@ export interface GroupedMealsDTO {
   title: string
   data: MealStorageDTO[]
 }
+
+export interface MetricsOfMealsStorageDTO {
+  totalMeals: number
+  totalMealsInDiet: number
+  totalMealsOffDiet: number
+  dietMealsPercentage: number
+  bestSequenceMealsInDiet: number
+}
