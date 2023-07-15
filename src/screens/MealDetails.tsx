@@ -1,18 +1,27 @@
-import { View } from 'react-native'
+import { useState, useEffect } from 'react'
+import { Alert, View } from 'react-native'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { ArrowLeft, PencilSimpleLine, Trash } from 'phosphor-react-native'
+import dayjs from 'dayjs'
+
+import { MealStorageDTO } from '@storage/meal/MealStorageDTO'
 
 import { Text } from '@components/Text'
 import { Button } from '@components/Button'
+import { Loading } from '@components/Loading'
 import { DietTag } from '@components/DietTag'
 import { Container } from '@components/Container'
 import { ScreenHeader } from '@components/ScreenHeader'
+import { findMealById } from '@storage/meal/findMealById'
 
 type RouteParams = {
   mealId: string
 }
 
 export function MealDetails() {
+  const [meal, setMeal] = useState<MealStorageDTO | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
+
   const navigation = useNavigation()
 
   const route = useRoute()
@@ -26,11 +35,40 @@ export function MealDetails() {
     navigation.navigate('edit', { mealId })
   }
 
-  const isInsideDiet = false
+  async function fetchMeal() {
+    setIsLoading(true)
+
+    try {
+      const meal = await findMealById(mealId)
+
+      setMeal(meal)
+    } catch (error) {
+      Alert.alert(
+        'Refeição',
+        'Ocorreu um erro ao buscar os dados da sua refeição. Tente novamente.',
+      )
+
+      console.log(error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    fetchMeal()
+  }, [])
+
+  if (isLoading) {
+    return <Loading />
+  }
+
+  const mealDateFormatted = dayjs(meal?.realizedAt).format(
+    'DD/MM/YYYY [às] HH:mm',
+  )
 
   return (
     <View className="flex-1">
-      <ScreenHeader.Root variant={isInsideDiet ? 'success' : 'danger'}>
+      <ScreenHeader.Root variant={meal?.isInsideDiet ? 'success' : 'danger'}>
         <ScreenHeader.ButtonIcon
           accessibilityLabel="Voltar para tela anterior"
           accessibilityHint="Tela inicial com a sua lista de refeições cadastradas"
@@ -45,12 +83,10 @@ export function MealDetails() {
         <View className="flex-1">
           <View>
             <Text weight="bold" size="xl" className="text-gray-900">
-              Sanduíche
+              {meal?.name}
             </Text>
 
-            <Text className="mt-2">
-              Sanduíche de pão integral com atum e salada de alface e tomate
-            </Text>
+            <Text className="mt-2">{meal?.description}</Text>
           </View>
 
           <View className="mt-6">
@@ -58,10 +94,13 @@ export function MealDetails() {
               Data e hora
             </Text>
 
-            <Text className="mt-2">12/08/2022 às 16:00</Text>
+            <Text className="mt-2">{mealDateFormatted}</Text>
           </View>
 
-          <DietTag isInsideDiet={isInsideDiet} className="mt-6 self-start" />
+          <DietTag
+            isInsideDiet={meal?.isInsideDiet}
+            className="mt-6 self-start"
+          />
         </View>
 
         <Button.Root
