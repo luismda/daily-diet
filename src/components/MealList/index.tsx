@@ -1,7 +1,7 @@
 import { SectionList } from 'react-native'
 import dayjs from 'dayjs'
 
-import { GroupedMealsStorageDTO } from '@storage/meal/MealStorageDTO'
+import { GroupedMealsStorageDTO } from '@storage/meal/types/MealStorageDTO'
 
 import { Text } from '@components/Text'
 import { MealCard } from '@components/MealCard'
@@ -27,8 +27,6 @@ export function MealList({ meals, onSelectedMeal }: MealListProps) {
           name={item.name}
           time={dayjs(item.realizedAt).format('HH:mm')}
           isInsideDiet={item.isInsideDiet}
-          accessibilityLabel={`Ver detalhes da refeição ${item.name}`}
-          accessibilityHint={`Tela de detalhes da refeição ${item.name}`}
           className={`mt-2 ${index === section.data.length - 1 ? 'mb-8' : ''}`}
           onPress={() => onSelectedMeal(item.id)}
         />

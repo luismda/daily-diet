@@ -18,6 +18,8 @@ export function MealCard({
 }: MealCardProps) {
   return (
     <TouchableOpacity
+      accessibilityLabel={`Ver detalhes da refeição ${name}`}
+      accessibilityHint={`Tela de detalhes da refeição ${name}`}
       activeOpacity={0.7}
       className={clsx(
         'flex-row items-center space-x-3 rounded-md border border-gray-300 py-[14px] pl-3 pr-4',
@@ -26,7 +28,12 @@ export function MealCard({
       {...rest}
     >
       <View className="flex-1 flex-row items-center space-x-3 divide-x-[1px] divide-gray-400">
-        <Text weight="bold" size="sm" className="text-gray-900">
+        <Text
+          accessibilityLabel={`Você fez essa refeição às ${time}`}
+          weight="bold"
+          size="sm"
+          className="text-gray-900"
+        >
           {time}
         </Text>
 

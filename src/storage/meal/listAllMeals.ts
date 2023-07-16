@@ -4,7 +4,7 @@ import { MEAL_COLLECTION } from '@constants/storage/meal'
 
 import { sortMealsByMoreRecent } from '@utils/sortMealsByMoreRecent'
 
-import { MealStorageDTO } from './MealStorageDTO'
+import { MealStorageDTO } from './types/MealStorageDTO'
 
 export async function listAllMeals() {
   const storedMeals = await AsyncStorage.getItem(MEAL_COLLECTION)

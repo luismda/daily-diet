@@ -62,12 +62,12 @@ export function Feedback() {
         {isInsideDiet ? (
           <Image
             source={primaryIllustrationImg}
-            alt="Ilustração nas tonalidades de cores branco e preto de uma mulher, com a perna esquerda dobrada e levantada para trás, além dos dois braços levantados para cima e uma expressão feliz no rosto."
+            alt="Ilustração nas tonalidades de cores branco e preto de uma mulher, com a perna esquerda dobrada e levantada para trás, além de estar com os dois braços levantados para cima e uma expressão feliz no rosto."
           />
         ) : (
           <Image
             source={secondaryIllustrationImg}
-            alt="Ilustração nas tonalidades de cores branco e preto de um homem sentado em cima de um objeto com o braço direito levantado para cima e a mão inclinada de forma reta, tendo o ombro direito levemente mais alto que o esquerdo, além de uma expressão triste no rosto."
+            alt="Ilustração nas tonalidades de cores branco e preto de um homem sentado em cima de um objeto cinza e parcialmente arredondado, com o braço direito levantado para cima e a mão inclinada horizontalmente de forma reta com a palma para cima, na altura do ombro, tendo o ombro direito levemente mais alto que o esquerdo, além de uma expressão triste no rosto."
           />
         )}
       </View>

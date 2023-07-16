@@ -8,7 +8,7 @@ import { AppError } from '@utils/AppError'
 
 import { updateMeal } from '@storage/meal/updateMeal'
 import { findMealById } from '@storage/meal/findMealById'
-import { MealStorageDTO } from '@storage/meal/MealStorageDTO'
+import { MealStorageDTO } from '@storage/meal/types/MealStorageDTO'
 
 import { Loading } from '@components/Loading'
 import { Container } from '@components/Container'
@@ -74,7 +74,7 @@ export function EditMeal() {
 
       Alert.alert(
         'Refeição',
-        'Ocorreu um erro ao buscar os dados da sua refeição. Tente novamente.',
+        'Ocorreu um erro ao buscar o registro da sua refeição. Tente novamente.',
       )
 
       console.log(error)
@@ -107,7 +107,7 @@ export function EditMeal() {
       <ScreenHeader.Root>
         <ScreenHeader.ButtonIcon
           accessibilityLabel="Voltar para tela da refeição"
-          accessibilityHint="Tela da refeição que você já cadastrou"
+          accessibilityHint="Tela com os detalhes da refeição que você já cadastrou"
           icon={ArrowLeft}
           onPress={handleGoBack}
         />

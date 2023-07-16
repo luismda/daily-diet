@@ -1,4 +1,4 @@
-import { MetricsOfMealsStorageDTO } from './MealStorageDTO'
+import { MetricsOfMealsStorageDTO } from './types/MealStorageDTO'
 
 import { listAllMeals } from './listAllMeals'
 

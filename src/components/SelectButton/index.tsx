@@ -31,6 +31,10 @@ export function SelectButton({
       {...rest}
     >
       <View
+        accessible
+        accessibilityLabel={`Bolinha ${
+          variant === 'success' ? 'verde' : 'vermelha'
+        }`}
         className={clsx('h-2 w-2 rounded-full', {
           'bg-green-500': variant === 'success',
           'bg-red-500': variant === 'danger',

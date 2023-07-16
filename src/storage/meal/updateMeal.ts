@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
-import { MealStorageDTO } from './MealStorageDTO'
+import { MealStorageDTO } from './types/MealStorageDTO'
 
 import { AppError } from '@utils/AppError'
 import { MEAL_COLLECTION } from '@constants/storage/meal'

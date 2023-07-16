@@ -3,7 +3,7 @@ import uuid from 'react-native-uuid'
 
 import { MEAL_COLLECTION } from '@constants/storage/meal'
 
-import { MealStorageDTO } from './MealStorageDTO'
+import { MealStorageDTO } from './types/MealStorageDTO'
 import { listAllMeals } from './listAllMeals'
 
 export async function createMeal(meal: Omit<MealStorageDTO, 'id'>) {

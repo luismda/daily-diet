@@ -21,6 +21,12 @@ export function DietTag({
       {...rest}
     >
       <View
+        accessible
+        accessibilityLabel={`Bolinha ${
+          isInsideDiet ? 'verde' : 'vermelha'
+        } indicando que a refeição ${
+          isInsideDiet ? 'está' : 'não está'
+        } na dieta.`}
         className={clsx('h-2 w-2 rounded-full', {
           'bg-green-500': isInsideDiet,
           'bg-red-500': !isInsideDiet,

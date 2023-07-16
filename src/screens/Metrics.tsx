@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Alert, View } from 'react-native'
 
-import { MetricsOfMealsStorageDTO } from '@storage/meal/MealStorageDTO'
+import { MetricsOfMealsStorageDTO } from '@storage/meal/types/MealStorageDTO'
 
 import { Text } from '@components/Text'
 import { Loading } from '@components/Loading'

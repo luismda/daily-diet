@@ -3,7 +3,7 @@ import dayjs from 'dayjs'
 import {
   GroupedMealsStorageDTO,
   MealStorageDTO,
-} from '@storage/meal/MealStorageDTO'
+} from '@storage/meal/types/MealStorageDTO'
 
 export function groupMealsBySameDay(meals: MealStorageDTO[]) {
   const groupedMealsBySameDay = meals.reduce<GroupedMealsStorageDTO[]>(

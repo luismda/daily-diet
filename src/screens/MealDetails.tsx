@@ -12,7 +12,7 @@ import { AppError } from '@utils/AppError'
 
 import { findMealById } from '@storage/meal/findMealById'
 import { deleteMealById } from '@storage/meal/deleteMealById'
-import { MealStorageDTO } from '@storage/meal/MealStorageDTO'
+import { MealStorageDTO } from '@storage/meal/types/MealStorageDTO'
 
 import { Text } from '@components/Text'
 import { Button } from '@components/Button'
@@ -89,7 +89,7 @@ export function MealDetails() {
 
       Alert.alert(
         'Refeição',
-        'Ocorreu um erro ao buscar os dados da sua refeição. Tente novamente.',
+        'Ocorreu um erro ao buscar o registro da sua refeição. Tente novamente.',
       )
 
       console.log(error)
@@ -161,6 +161,7 @@ export function MealDetails() {
         <Button.Root
           variant="secondary"
           className="mt-2"
+          accessibilityHint="Após confirmar a exclusão da refeição, você irá para tela inicial com a sua lista de refeições cadastradas."
           onPress={handleDeleteMeal}
         >
           <Button.Icon variant="secondary" icon={Trash} />

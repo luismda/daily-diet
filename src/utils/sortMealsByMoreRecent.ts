@@ -1,4 +1,4 @@
-import { MealStorageDTO } from '@storage/meal/MealStorageDTO'
+import { MealStorageDTO } from '@storage/meal/types/MealStorageDTO'
 
 export function sortMealsByMoreRecent(meals: MealStorageDTO[]) {
   const sortedMealsByMoreRecent = meals.sort((a, b) => {

@@ -4,10 +4,10 @@ import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Plus } from 'phosphor-react-native'
 
-import { GroupedMealsStorageDTO } from '@storage/meal/MealStorageDTO'
+import { groupMealsBySameDay } from '@utils/groupMealsBySameDay'
 
 import { listAllMeals } from '@storage/meal/listAllMeals'
-import { groupMealsBySameDay } from '@utils/groupMealsBySameDay'
+import { GroupedMealsStorageDTO } from '@storage/meal/types/MealStorageDTO'
 
 import { Text } from '@components/Text'
 import { Button } from '@components/Button'
@@ -66,7 +66,6 @@ export function Home() {
         <Text className="text-gray-900">Refeições</Text>
 
         <Button.Root
-          accessibilityLabel="Cadastrar uma nova refeição"
           accessibilityHint="Tela com um fomulário para cadastrar uma nova refeição"
           className="mb-8 mt-2"
           onPress={handleNavigateToNewMeal}
