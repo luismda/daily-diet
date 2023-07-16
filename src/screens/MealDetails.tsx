@@ -1,6 +1,10 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useCallback } from 'react'
 import { Alert, View } from 'react-native'
-import { useNavigation, useRoute } from '@react-navigation/native'
+import {
+  useNavigation,
+  useRoute,
+  useFocusEffect,
+} from '@react-navigation/native'
 import { ArrowLeft, PencilSimpleLine, Trash } from 'phosphor-react-native'
 import dayjs from 'dayjs'
 
@@ -54,9 +58,11 @@ export function MealDetails() {
     }
   }, [mealId])
 
-  useEffect(() => {
-    fetchMeal()
-  }, [fetchMeal])
+  useFocusEffect(
+    useCallback(() => {
+      fetchMeal()
+    }, [fetchMeal]),
+  )
 
   if (isLoading) {
     return <Loading />

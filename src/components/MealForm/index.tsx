@@ -66,10 +66,15 @@ export type MealFormDataOutput = z.output<typeof mealFormSchema>
 
 interface MealFormProps {
   action?: 'create' | 'edit'
+  defaultValues?: MealFormDataInput
   onSubmit: (meal: MealFormDataOutput) => Promise<void>
 }
 
-export function MealForm({ action = 'create', onSubmit }: MealFormProps) {
+export function MealForm({
+  action = 'create',
+  defaultValues,
+  onSubmit,
+}: MealFormProps) {
   const {
     control,
     formState: { errors, isSubmitting },
@@ -77,6 +82,7 @@ export function MealForm({ action = 'create', onSubmit }: MealFormProps) {
     reset,
   } = useForm<MealFormDataInput>({
     resolver: zodResolver(mealFormSchema),
+    defaultValues,
   })
 
   async function handleMealFormSubmit(meal: MealFormDataOutput) {
