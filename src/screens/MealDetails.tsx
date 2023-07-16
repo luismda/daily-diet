@@ -8,6 +8,9 @@ import {
 import { ArrowLeft, PencilSimpleLine, Trash } from 'phosphor-react-native'
 import dayjs from 'dayjs'
 
+import { AppError } from '@utils/AppError'
+
+import { findMealById } from '@storage/meal/findMealById'
 import { MealStorageDTO } from '@storage/meal/MealStorageDTO'
 
 import { Text } from '@components/Text'
@@ -16,7 +19,6 @@ import { Loading } from '@components/Loading'
 import { DietTag } from '@components/DietTag'
 import { Container } from '@components/Container'
 import { ScreenHeader } from '@components/ScreenHeader'
-import { findMealById } from '@storage/meal/findMealById'
 
 type RouteParams = {
   mealId: string
@@ -47,6 +49,11 @@ export function MealDetails() {
 
       setMeal(meal)
     } catch (error) {
+      if (error instanceof AppError) {
+        Alert.alert('Refeição', error.message)
+        return
+      }
+
       Alert.alert(
         'Refeição',
         'Ocorreu um erro ao buscar os dados da sua refeição. Tente novamente.',

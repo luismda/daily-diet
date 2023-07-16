@@ -67,6 +67,11 @@ export function EditMeal() {
 
       setMeal(meal)
     } catch (error) {
+      if (error instanceof AppError) {
+        Alert.alert('Refeição', error.message)
+        return
+      }
+
       Alert.alert(
         'Refeição',
         'Ocorreu um erro ao buscar os dados da sua refeição. Tente novamente.',

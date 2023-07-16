@@ -1,3 +1,4 @@
+import { AppError } from '@utils/AppError'
 import { listAllMeals } from './listAllMeals'
 
 export async function findMealById(mealId: string) {
@@ -6,7 +7,7 @@ export async function findMealById(mealId: string) {
   const meal = storedMeals.find((meal) => meal.id === mealId)
 
   if (!meal) {
-    return null
+    throw new AppError('Não foi possível encontrar essa refeição.')
   }
 
   return meal
