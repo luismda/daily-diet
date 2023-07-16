@@ -11,6 +11,7 @@ import dayjs from 'dayjs'
 import { AppError } from '@utils/AppError'
 
 import { findMealById } from '@storage/meal/findMealById'
+import { deleteMealById } from '@storage/meal/deleteMealById'
 import { MealStorageDTO } from '@storage/meal/MealStorageDTO'
 
 import { Text } from '@components/Text'
@@ -39,6 +40,38 @@ export function MealDetails() {
 
   function handleNavigateToEditMeal() {
     navigation.navigate('edit', { mealId })
+  }
+
+  async function deleteMeal() {
+    try {
+      await deleteMealById(mealId)
+
+      navigation.navigate('home')
+    } catch (error) {
+      Alert.alert(
+        'Excluir refeição',
+        'Ocorreu um erro ao excluir sua refeição. Tente novamente.',
+      )
+
+      console.log(error)
+    }
+  }
+
+  function handleDeleteMeal() {
+    Alert.alert(
+      'Excluir refeição',
+      'Deseja realmente excluir o registro da refeição?',
+      [
+        {
+          text: 'Cancelar',
+          style: 'cancel',
+        },
+        {
+          text: 'Sim, excluir',
+          onPress: () => deleteMeal(),
+        },
+      ],
+    )
   }
 
   const fetchMeal = useCallback(async () => {
@@ -125,7 +158,11 @@ export function MealDetails() {
           <Button.Text>Editar refeição</Button.Text>
         </Button.Root>
 
-        <Button.Root variant="secondary" className="mt-2">
+        <Button.Root
+          variant="secondary"
+          className="mt-2"
+          onPress={handleDeleteMeal}
+        >
           <Button.Icon variant="secondary" icon={Trash} />
 
           <Button.Text variant="secondary">Excluir refeição</Button.Text>

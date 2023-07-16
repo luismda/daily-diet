@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useState, useCallback } from 'react'
 import { ActivityIndicator, TouchableOpacity } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useFocusEffect } from '@react-navigation/native'
 import { ArrowUpRight } from 'phosphor-react-native'
 import { styled } from 'nativewind'
 import { clsx } from 'clsx'
@@ -41,9 +41,11 @@ export function SummaryDietCardButton() {
     }
   }
 
-  useEffect(() => {
-    fetchDietMealsPercentage()
-  }, [])
+  useFocusEffect(
+    useCallback(() => {
+      fetchDietMealsPercentage()
+    }, []),
+  )
 
   const hasMoreThanHalfOfMealsInDiet = dietMealsPercentage >= 0.5
   const percentageFormatted = numberFormat.format(dietMealsPercentage * 100)

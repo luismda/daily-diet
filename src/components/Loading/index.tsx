@@ -7,7 +7,7 @@ const StyledActivityIndicator = styled(ActivityIndicator, {
 
 export function Loading() {
   return (
-    <View className="flex-1 items-center justify-center">
+    <View className="flex-1 items-center justify-center bg-gray-100">
       <StyledActivityIndicator color="text-gray-900" />
     </View>
   )
